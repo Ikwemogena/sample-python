@@ -1,0 +1,298 @@
+[2025-10-24_21:10:11] [SUCCESS] Project directory entered and Docker files verified.
+[2025-10-24_21:10:11] [INFO] Checking SSH connectivity to root@178.62.38.117...
+[2025-10-24_21:10:12] [SUCCESS] SSH connectivity established.
+[2025-10-24_21:10:12] [INFO] Preparing remote environment on 178.62.38.117...
+[2025-10-24_21:10:12] [INFO] Detecting package manager and updating system packages...
+[2025-10-24_21:10:12] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "command -v apt"
+/usr/bin/apt
+[2025-10-24_21:10:12] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo DEBIAN_FRONTEND=noninteractive apt update && sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y"
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Hit:1 http://mirrors.digitalocean.com/ubuntu plucky InRelease
+Hit:2 http://mirrors.digitalocean.com/ubuntu plucky-updates InRelease
+Hit:3 https://repos-droplet.digitalocean.com/apt/droplet-agent main InRelease
+Hit:4 http://mirrors.digitalocean.com/ubuntu plucky-backports InRelease
+Hit:5 http://security.ubuntu.com/ubuntu plucky-security InRelease
+Reading package lists...
+Building dependency tree...
+Reading state information...
+2 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+Calculating upgrade...
+Not upgrading yet due to phasing:
+  fwupd  libfwupd3
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 2
+[2025-10-24_21:10:15] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "docker --version"
+bash: line 1: docker: command not found
+[2025-10-24_21:10:16] [ERROR] Remote command failed: docker --version
+[2025-10-24_21:10:16] [INFO] Docker not found. Installing Docker using the universal installation script...
+[2025-10-24_21:10:16] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "curl -fsSL https://get.docker.com -o get-docker.sh"
+[2025-10-24_21:10:16] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo sh get-docker.sh"
+# Executing docker install script, commit: 86415efcfe5f8d966625843da41a0f798238cce5
++ sh -c apt-get -qq update >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get -y -qq install ca-certificates curl >/dev/null
++ sh -c install -m 0755 -d /etc/apt/keyrings
++ sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" -o /etc/apt/keyrings/docker.asc
++ sh -c chmod a+r /etc/apt/keyrings/docker.asc
++ sh -c echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu plucky stable" > /etc/apt/sources.list.d/docker.list
++ sh -c apt-get -qq update >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get -y -qq install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin docker-model-plugin >/dev/null
+
+Restarting services...
+ systemctl restart cron.service multipathd.service packagekit.service polkit.service
+
+Service restarts being deferred:
+ systemctl restart ModemManager.service
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart getty@tty1.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ root @ session #1: sshd-session[1733,1837]
+ root @ session #4: sshd-session[1878,1927]
+ root @ user manager service: systemd[1737]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ sh -c docker version
+Client: Docker Engine - Community
+ Version:           28.5.1
+ API version:       1.51
+ Go version:        go1.24.8
+ Git commit:        e180ab8
+ Built:             Wed Oct  8 12:17:13 2025
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          28.5.1
+  API version:      1.51 (minimum version 1.24)
+  Go version:       go1.24.8
+  Git commit:       f8215cc
+  Built:            Wed Oct  8 12:17:13 2025
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v1.7.28
+  GitCommit:        b98a3aace656320842a23f4a392a33f46af97866
+ runc:
+  Version:          1.3.0
+  GitCommit:        v1.3.0-0-g4ca628d1
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+================================================================================
+
+To run Docker as a non-privileged user, consider setting up the
+Docker daemon in rootless mode for your user:
+
+    dockerd-rootless-setuptool.sh install
+
+Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.
+
+
+To run the Docker daemon as a fully privileged service, but granting non-root
+users access, refer to https://docs.docker.com/go/daemon-access/
+
+WARNING: Access to the remote API on a privileged Docker daemon is equivalent
+         to root access on the host. Refer to the 'Docker daemon attack surface'
+         documentation for details: https://docs.docker.com/go/attack-surface/
+
+================================================================================
+
+[2025-10-24_21:10:42] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo usermod -aG docker root"
+[2025-10-24_21:10:44] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "rm -f get-docker.sh"
+[2025-10-24_21:10:44] [INFO] Docker installed. Please note: You might need to log out and back in on the remote server for Docker group changes to take effect for the current SSH session. Script will attempt to proceed.
+[2025-10-24_21:10:44] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo systemctl restart docker"
+[2025-10-24_21:10:45] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "docker --version"
+Docker version 28.5.1, build e180ab8
+[2025-10-24_21:10:46] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo systemctl enable docker && sudo systemctl start docker"
+Synchronizing state of docker.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable docker
+[2025-10-24_21:10:47] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "docker compose version"
+Docker Compose version v2.40.2
+[2025-10-24_21:10:48] [INFO] Docker Compose already installed.
+[2025-10-24_21:10:48] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "docker compose version || docker-compose --version"
+Docker Compose version v2.40.2
+[2025-10-24_21:10:49] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "nginx -v"
+bash: line 1: nginx: command not found
+[2025-10-24_21:10:50] [ERROR] Remote command failed: nginx -v
+[2025-10-24_21:10:50] [INFO] Nginx not found. Installing Nginx...
+[2025-10-24_21:10:50] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "command -v apt"
+/usr/bin/apt
+[2025-10-24_21:10:51] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo apt install -y nginx"
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Solving dependencies...
+Installing:
+  nginx
+
+Installing dependencies:
+  nginx-common
+
+Suggested packages:
+  fcgiwrap  nginx-doc  ssl-cert
+
+Summary:
+  Upgrading: 0, Installing: 2, Removing: 0, Not Upgrading: 2
+  Download size: 741 kB
+  Space needed: 2108 kB / 21.6 GB available
+
+Get:1 http://mirrors.digitalocean.com/ubuntu plucky-updates/main amd64 nginx-common all 1.26.3-2ubuntu1.2 [43.7 kB]
+Get:2 http://mirrors.digitalocean.com/ubuntu plucky-updates/main amd64 nginx amd64 1.26.3-2ubuntu1.2 [697 kB]
+Fetched 741 kB in 0s (4891 kB/s)
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Selecting previously unselected package nginx-common.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 110633 files and directories currently installed.)
+Preparing to unpack .../nginx-common_1.26.3-2ubuntu1.2_all.deb ...
+Unpacking nginx-common (1.26.3-2ubuntu1.2) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../nginx_1.26.3-2ubuntu1.2_amd64.deb ...
+Unpacking nginx (1.26.3-2ubuntu1.2) ...
+Setting up nginx-common (1.26.3-2ubuntu1.2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Created symlink '/etc/systemd/system/multi-user.target.wants/nginx.service' → '/usr/lib/systemd/system/nginx.service'.
+Setting up nginx (1.26.3-2ubuntu1.2) ...
+ * Upgrading binary nginx
+   ...done.
+Processing triggers for man-db (2.13.0-1) ...
+Processing triggers for ufw (0.36.2-9) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+
+Restarting services...
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart getty@tty1.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ root @ session #1: sshd-session[1733,1837]
+ root @ session #4: sshd-session[1878,1927]
+ root @ user manager service: systemd[1737]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Pending kernel upgrade
+----------------------
+
+Newer kernel available
+
+The currently running kernel version is 6.14.0-23-generic which is not the 
+expected kernel version 6.14.0-34-generic.
+
+Restarting the system to load the new kernel will not be handled automatically, 
+so you should consider rebooting.
+
+[2025-10-24_21:10:59] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "nginx -v"
+nginx version: nginx/1.26.3 (Ubuntu)
+[2025-10-24_21:11:01] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo systemctl enable nginx && sudo systemctl start nginx"
+Synchronizing state of nginx.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable nginx
+[2025-10-24_21:11:05] [SUCCESS] Remote environment prepared.
+[2025-10-24_21:11:05] [INFO] Deploying the Dockerized application...
+[2025-10-24_21:11:05] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "mkdir -p /tmp/app_deployment"
+[2025-10-24_21:11:05] [INFO] Transferring project files to 178.62.38.117:/tmp/app_deployment
+[2025-10-24_21:11:09] [SUCCESS] Project files transferred.
+[2025-10-24_21:11:09] [INFO] Building and running containers on remote server...
+[2025-10-24_21:11:09] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "test -f /tmp/app_deployment/docker-compose.yml"
+[2025-10-24_21:11:10] [ERROR] Remote command failed: test -f /tmp/app_deployment/docker-compose.yml
+[2025-10-24_21:11:10] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "test -f /tmp/app_deployment/Dockerfile"
+[2025-10-24_21:11:10] [INFO] Dockerfile found. Using Docker build/run.
+[2025-10-24_21:11:10] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "cd /tmp/app_deployment && docker stop app_container || true"
+Error response from daemon: No such container: app_container
+[2025-10-24_21:11:10] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "cd /tmp/app_deployment && docker rm app_container || true"
+Error response from daemon: No such container: app_container
+[2025-10-24_21:11:11] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "cd /tmp/app_deployment && docker rmi app_image || true"
+Error response from daemon: No such image: app_image:latest
+[2025-10-24_21:11:12] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "cd /tmp/app_deployment && docker build -t app_image ."
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 612B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.9-slim
+#2 DONE 1.5s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 49B done
+#4 DONE 0.0s
+
+#5 [2/5] WORKDIR /app
+#5 CACHED
+
+#6 [3/5] COPY requirements.txt .
+#6 CACHED
+
+#7 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#7 CACHED
+
+#8 [5/5] COPY python-app .
+#8 ERROR: failed to calculate checksum of ref 1cb3d248-33f5-4015-be42-9e71844462c3::ggnufxguf7k27q6yspfjddgbj: "/python-app": not found
+
+#9 [1/5] FROM docker.io/library/python:3.9-slim@sha256:545badebace9a958b98d3e272f0f0d46c0a1a389ac77e24c33f2e7b548ce1b6b
+#9 resolve docker.io/library/python:3.9-slim@sha256:545badebace9a958b98d3e272f0f0d46c0a1a389ac77e24c33f2e7b548ce1b6b 0.0s done
+#9 sha256:545badebace9a958b98d3e272f0f0d46c0a1a389ac77e24c33f2e7b548ce1b6b 10.36kB / 10.36kB done
+#9 sha256:dc9f486a31b5c0642ed5606b41c820fae66e6d91003c32e4f3d1624b6e7425cd 1.74kB / 1.74kB done
+#9 sha256:725dd64d2f62808e0aee4d5d916f4c208275716e74cc700ed68aa17078411ca9 5.30kB / 5.30kB done
+#9 CANCELED
+------
+ > [5/5] COPY python-app .:
+------
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 20)
+Dockerfile:14
+--------------------
+  12 |     
+  13 |     # Copy the rest of the application's code
+  14 | >>> COPY python-app .
+  15 |     
+  16 |     # Make port 5000 available to the world outside this container
+--------------------
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref 1cb3d248-33f5-4015-be42-9e71844462c3::ggnufxguf7k27q6yspfjddgbj: "/python-app": not found
+[2025-10-24_21:11:15] [ERROR] Remote command failed: cd /tmp/app_deployment && docker build -t app_image .
+[2025-10-24_21:11:15] [ERROR] Script failed at line 302: 'return 1'.
+[2025-10-24_21:11:15] [ERROR] Deployment failed. Check the log file (deploy_20251024_210930.log) for details.

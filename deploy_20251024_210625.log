@@ -1,0 +1,61 @@
+[2025-10-24_21:07:04] [SUCCESS] Project directory entered and Docker files verified.
+[2025-10-24_21:07:04] [INFO] Checking SSH connectivity to root@178.62.38.117...
+[2025-10-24_21:07:04] [SUCCESS] SSH connectivity established.
+[2025-10-24_21:07:04] [INFO] Preparing remote environment on 178.62.38.117...
+[2025-10-24_21:07:04] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo DEBIAN_FRONTEND=noninteractive apt update && sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y"
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Hit:1 http://security.ubuntu.com/ubuntu plucky-security InRelease
+Hit:2 http://mirrors.digitalocean.com/ubuntu plucky InRelease
+Hit:3 http://mirrors.digitalocean.com/ubuntu plucky-updates InRelease
+Hit:4 http://mirrors.digitalocean.com/ubuntu plucky-backports InRelease
+Hit:5 https://repos-droplet.digitalocean.com/apt/droplet-agent main InRelease
+Reading package lists...
+Building dependency tree...
+Reading state information...
+2 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+Calculating upgrade...
+Not upgrading yet due to phasing:
+  fwupd  libfwupd3
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 2
+[2025-10-24_21:07:14] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "docker --version"
+bash: line 1: docker: command not found
+[2025-10-24_21:07:14] [ERROR] Remote command failed: docker --version
+[2025-10-24_21:07:14] [INFO] Docker not found. Installing Docker...
+[2025-10-24_21:07:14] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo apt install -y apt-transport-https ca-certificates curl software-properties-common"
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+apt-transport-https is already the newest version (3.0.0).
+ca-certificates is already the newest version (20241223).
+curl is already the newest version (8.12.1-3ubuntu1).
+curl set to manually installed.
+software-properties-common is already the newest version (0.111.1).
+software-properties-common set to manually installed.
+Solving dependencies...
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 2
+[2025-10-24_21:07:15] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg"
+[2025-10-24_21:07:16] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "echo "deb [arch= signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu  stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null"
+[2025-10-24_21:07:16] [INFO] Executing remote command: ssh -i "/Users/ikwemogena/.ssh/personal_key" "root@178.62.38.117" "sudo apt update"
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Error: Malformed entry 1 in list file /etc/apt/sources.list.d/docker.list ([option] no value)
+Error: The list of sources could not be read.
+[2025-10-24_21:07:16] [ERROR] Remote command failed: sudo apt update
+[2025-10-24_21:07:16] [ERROR] Script failed at line 188: 'return 1'.
+[2025-10-24_21:07:16] [ERROR] Deployment failed. Check the log file (deploy_20251024_210625.log) for details.

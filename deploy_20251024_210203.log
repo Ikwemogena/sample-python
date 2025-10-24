@@ -1,0 +1,5 @@
+[2025-10-24_21:02:52] [SUCCESS] Project directory entered and Docker files verified.
+[2025-10-24_21:02:52] [INFO] Checking SSH connectivity to root@178.62.38.117...
+root@178.62.38.117: Permission denied (publickey).
+[2025-10-24_21:02:52] [ERROR] Script failed at line 161: 'ssh -o BatchMode=yes -o ConnectTimeout=5 -i "$SSH_KEY_PATH" "$SSH_USERNAME@$SERVER_IP" "exit" 2>> "$LOG_FILE"'.
+[2025-10-24_21:02:52] [ERROR] Deployment failed. Check the log file (deploy_20251024_210203.log) for details.
